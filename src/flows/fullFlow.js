@@ -18,6 +18,10 @@ async function fullFlow() {
     console.log('📌 Step 1: Login');
     const loginResult = await api.login(email, password, totp);
     api.setToken(loginResult.token);
+    
+    // Save token for standalone scripts
+    require('fs').writeFileSync('.token', loginResult.token);
+    console.log('  Token saved to .token');
     console.log('✅ Login successful!');
     console.log('');
 
@@ -44,6 +48,12 @@ async function fullFlow() {
       const customer = await api.getCustomerByUsername(customerUsername);
       customerId = customer?.id;
       console.log('  Customer ID:', customerId || 'not found');
+      
+      // Save customer ID for standalone scripts
+      if (customerId) {
+        require('fs').writeFileSync('.customer_id', customerId);
+        console.log('  Customer ID saved to .customer_id');
+      }
     } catch (e) {
       console.log('  Note: Could not get customer ID:', e.message);
     }
@@ -51,18 +61,7 @@ async function fullFlow() {
 
     // Step 3: Add Products
     console.log('📌 Step 3: Add Products (10 products)');
-    const products = [
-      { product_id: config.products['Thai Lotto'], prefixes: '', client_name: '', fiat_currency_id: config.currencies.fiat['THB'], cryptocurrency_id: config.currencies.crypto['USDT'] },
-      { product_id: config.products['Super API'], prefixes: '', client_name: '', fiat_currency_id: config.currencies.crypto['USDT'], cryptocurrency_id: config.currencies.crypto['USDT'] },
-      { product_id: config.products['DIRect_API'], prefixes: '', client_name: '', fiat_currency_id: config.currencies.fiat['THB'], cryptocurrency_id: config.currencies.crypto['USDT'] },
-      { product_id: config.products['PGSOFT'], prefixes: '', client_name: '', fiat_currency_id: config.currencies.fiat['THB'], cryptocurrency_id: config.currencies.crypto['USDT'] },
-      { product_id: config.products['Fix rate'], prefixes: '', client_name: '', fiat_currency_id: config.currencies.fiat['THB'], cryptocurrency_id: config.currencies.crypto['USDT'] },
-      { product_id: config.products['นอกเครือ'], prefixes: '', client_name: '', fiat_currency_id: config.currencies.fiat['THB'], cryptocurrency_id: config.currencies.crypto['USDT'] },
-      { product_id: config.products['ในเครือ'], prefixes: '', client_name: '', fiat_currency_id: config.currencies.fiat['THB'], cryptocurrency_id: config.currencies.crypto['USDT'] },
-      { product_id: config.products['SportbookV.2'], prefixes: '', client_name: '', fiat_currency_id: config.currencies.crypto['USDT'], cryptocurrency_id: config.currencies.crypto['USDT'] },
-      { product_id: config.products['Tiamut ในเครือ'], prefixes: '', client_name: '', fiat_currency_id: config.currencies.fiat['IDR'], cryptocurrency_id: config.currencies.crypto['USDT'] },
-      { product_id: config.products['Tiamut นอกเครือ'], prefixes: '', client_name: '', fiat_currency_id: config.currencies.fiat['THB'], cryptocurrency_id: config.currencies.crypto['USDT'] },
-    ];
+    const products = config.defaultProducts;
 
     for (const product of products) {
       await api.addProduct(customerId, product);
@@ -80,11 +79,15 @@ async function fullFlow() {
     customerProducts.forEach(p => {
       productMap[p.product_name] = p.customer_product_id;
     });
+    
+    // Save customer products map for standalone scripts
+    require('fs').writeFileSync('.customer_products.json', JSON.stringify(productMap, null, 2));
+    console.log('  Product map saved to .customer_products.json');
 
     const subProducts = [
       { productName: 'Thai Lotto', sub_product_id: config.subProducts['Thai Lotto']['W/L'] },
-      { productName: 'Super API', sub_product_id: config.subProducts['Super API']['W/L'] },
-      { productName: 'DIRect_API( สำหรับทดสอบเท่านั้น )', sub_product_id: config.subProducts['DIRect_API']['optest_api'] },
+      { productName: 'Amb SuperAPI', sub_product_id: config.subProducts['Super API']['W/L'] },
+      { productName: 'DIRect API', sub_product_id: config.subProducts['DIRect_API']['testdai31'] },
       { productName: 'ระบบออโต้ Tiamut (PGSOFT)', sub_product_id: config.subProducts['PGSOFT']['Monthly Fee PG'] },
       { productName: 'ระบบออโต้ (นอกเครือ)Fix rate', sub_product_id: config.subProducts['Fix rate']['Monthly Fee fix rate'] },
       { productName: 'ระบบออโต้ (นอกเครือ)', sub_product_id: config.subProducts['นอกเครือ']['Monthly fee'] },
@@ -92,7 +95,7 @@ async function fullFlow() {
       { productName: 'SportbookV.2', sub_product_id: config.subProducts['SportbookV.2']['W/L'] },
       { productName: 'ระบบออโต้ Tiamut (ในเครือ)', sub_product_id: config.subProducts['Tiamut ในเครือ']['MAINTENANCE'] },
       { productName: 'ระบบออโต้ Tiamut (นอกเครือ)', sub_product_id: config.subProducts['Tiamut นอกเครือ']['Monthly Fee fix rate'] },
-    ];
+    ];;
 
     let subProductCount = 0;
     for (const sp of subProducts) {

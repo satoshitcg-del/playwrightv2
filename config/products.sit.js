@@ -4,7 +4,7 @@ module.exports = {
   apiUrl: 'https://apixint-sit.askmebill.com',
   
   // Product IDs - SIT (Update these!)
-  products:{
+  products: {
     'Thai Lotto': '696531c79c898fce9f7c1702',
     'Super API': '696531a572da1252718d1ce9',
     'DIRect_API': '691f256be479de4d15bf9c4e',
@@ -16,6 +16,20 @@ module.exports = {
     'Tiamut ในเครือ': '67ea586acb2767a97df3fb05',
     'Tiamut นอกเครือ': '67ea5855cb2767a97df3fb03',
   },
+  
+  // Products with prefixes and client_name
+  defaultProducts: [
+    { product_id: '696531c79c898fce9f7c1702', prefixes: 'company', client_name: 'company', fiat_currency_id: '6761431c002bb9ff210abc4f', cryptocurrency_id: '6761431c002bb9ff210abc4f' }, // Thai Lotto
+    { product_id: '696531a572da1252718d1ce9', prefixes: 'boatsuperapi', client_name: 'boatsuperapi', fiat_currency_id: '6761431c002bb9ff210abc4f', cryptocurrency_id: '6761431c002bb9ff210abc4f' }, // Super API
+    { product_id: '691f256be479de4d15bf9c4e', prefixes: '', client_name: '', fiat_currency_id: '6761431c002bb9ff210abb02', cryptocurrency_id: '6761431c002bb9ff210abc4f' }, // DIRect_API
+    { product_id: '68f74572ae095015c6d716f3', prefixes: 'PG88', client_name: '', fiat_currency_id: '6761431c002bb9ff210abb02', cryptocurrency_id: '6761431c002bb9ff210abc4f' }, // PGSOFT
+    { product_id: '68f21b4e49423eabd805f7d8', prefixes: 'AMBGT', client_name: 'AMB_GAME', fiat_currency_id: '6761431c002bb9ff210abb02', cryptocurrency_id: '6761431c002bb9ff210abc4f' }, // Fix rate
+    { product_id: '689d8d31c82e1edd8f4172bf', prefixes: 'JK444', client_name: 'JOKER', fiat_currency_id: '6761431c002bb9ff210abb02', cryptocurrency_id: '6761431c002bb9ff210abc4f' }, // นอกเครือ
+    { product_id: '689308019baa0e160653a93f', prefixes: 'MLPG', client_name: 'AMB_GAME', fiat_currency_id: '6761431c002bb9ff210abb02', cryptocurrency_id: '6761431c002bb9ff210abc4f' }, // ในเครือ
+    { product_id: '67ea587dcb2767a97df3fb07', prefixes: 'TEST', client_name: 'sportbook101', fiat_currency_id: '6761431c002bb9ff210abc4f', cryptocurrency_id: '6761431c002bb9ff210abc4f' }, // SportbookV.2
+    { product_id: '67ea586acb2767a97df3fb05', prefixes: 'IDR', client_name: 'ambking', fiat_currency_id: '6761431c002bb9ff210abb7d', cryptocurrency_id: '6761431c002bb9ff210abc4f' }, // Tiamut ในเครือ
+    { product_id: '67ea5855cb2767a97df3fb03', prefixes: 'AMBWIN', client_name: 'ambking', fiat_currency_id: '6761431c002bb9ff210abb02', cryptocurrency_id: '6761431c002bb9ff210abc4f' }, // Tiamut นอกเครือ
+  ],
   
   // Sub-Products (Update these!)
   subProducts: {
@@ -32,7 +46,7 @@ module.exports = {
   },
   
   // Currencies
- currencies: {
+  currencies: {
     fiat: {
       'THB': '6761431c002bb9ff210abb02',
       'IDR': '6761431c002bb9ff210abb7d',
