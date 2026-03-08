@@ -11,7 +11,7 @@
  *   ENV=prod    -> products.prod.js
  */
 
-const env = process.env.ENV || 'dev';
+const env = process.env.ENV || 'sit';
 const configFile = `./products.${env}`;
 
 let config;
