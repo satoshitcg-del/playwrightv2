@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const API_URL = process.env.API_URL || 'https://apixint-dev.askmebill.com';
+const config = require('../../config');
 
 class AskMeBillAPI {
   constructor() {
@@ -258,9 +259,11 @@ class AskMeBillAPI {
     const response = await this.client.post('/v1/direct-api/update-status', payload);
     return response.data;
   }
-    const response = await this.client.get('/v1/currency/fiat');
-    return response.data;
-  }
+
+  /**
+   * Get currencies
+   */
+  async getFiatCurrencies() {
 
   async getCryptoCurrencies() {
     const response = await this.client.get('/v1/currency/crypto');
@@ -273,6 +276,42 @@ class AskMeBillAPI {
   async getProfile() {
     const response = await this.client.get('/v1/user/profile');
     return response.data;
+  }
+
+  /**
+   * Get product ID by name
+   */
+  getProductId(productName) {
+    return config.products[productName] || null;
+  }
+
+  /**
+   * Get sub-product ID by name
+   */
+  getSubProductId(productName, subProductName) {
+    const subProducts = config.subProducts[productName];
+    return subProducts ? subProducts[subProductName] : null;
+  }
+
+  /**
+   * Get currency ID
+   */
+  getCurrencyId(type, currency) {
+    return config.currencies[type]?.[currency] || null;
+  }
+
+  /**
+   * Get all products
+   */
+  getAllProducts() {
+    return config.products;
+  }
+
+  /**
+   * Get config
+   */
+  getConfig() {
+    return config;
   }
 }
 
