@@ -51,18 +51,17 @@ async function fullFlow() {
 
     // Step 3: Add Products
     console.log('📌 Step 3: Add Products (10 products)');
-    const randomPrefix = 'test' + Date.now().toString().slice(-4);
     const products = [
-      { product_id: config.products['Thai Lotto'], prefixes: randomPrefix + '1', client_name: randomPrefix + '_company', fiat_currency_id: config.currencies.fiat['THB'], cryptocurrency_id: config.currencies.crypto['USDT'] },
-      { product_id: config.products['Super API'], prefixes: randomPrefix + '2', client_name: randomPrefix + '_superapi', fiat_currency_id: config.currencies.crypto['USDT'], cryptocurrency_id: config.currencies.crypto['USDT'] },
-      { product_id: config.products['DIRect_API'], prefixes: randomPrefix + '3', client_name: randomPrefix + '_direct', fiat_currency_id: config.currencies.fiat['THB'], cryptocurrency_id: config.currencies.crypto['USDT'] },
-      { product_id: config.products['PGSOFT'], prefixes: randomPrefix + '4', client_name: randomPrefix + '_pg', fiat_currency_id: config.currencies.fiat['THB'], cryptocurrency_id: config.currencies.crypto['USDT'] },
-      { product_id: config.products['Fix rate'], prefixes: randomPrefix + '5', client_name: randomPrefix + '_fix', fiat_currency_id: config.currencies.fiat['THB'], cryptocurrency_id: config.currencies.crypto['USDT'] },
-      { product_id: config.products['นอกเครือ'], prefixes: randomPrefix + '6', client_name: randomPrefix + '_outside', fiat_currency_id: config.currencies.fiat['THB'], cryptocurrency_id: config.currencies.crypto['USDT'] },
-      { product_id: config.products['ในเครือ'], prefixes: randomPrefix + '7', client_name: randomPrefix + '_inside', fiat_currency_id: config.currencies.fiat['THB'], cryptocurrency_id: config.currencies.crypto['USDT'] },
-      { product_id: config.products['SportbookV.2'], prefixes: randomPrefix + '8', client_name: randomPrefix + '_sport', fiat_currency_id: config.currencies.crypto['USDT'], cryptocurrency_id: config.currencies.crypto['USDT'] },
-      { product_id: config.products['Tiamut ในเครือ'], prefixes: randomPrefix + '9', client_name: randomPrefix + '_tiamut_in', fiat_currency_id: config.currencies.fiat['IDR'], cryptocurrency_id: config.currencies.crypto['USDT'] },
-      { product_id: config.products['Tiamut นอกเครือ'], prefixes: randomPrefix + '0', client_name: randomPrefix + '_tiamut_out', fiat_currency_id: config.currencies.fiat['THB'], cryptocurrency_id: config.currencies.crypto['USDT'] },
+      { product_id: config.products['Thai Lotto'], prefixes: '', client_name: '', fiat_currency_id: config.currencies.fiat['THB'], cryptocurrency_id: config.currencies.crypto['USDT'] },
+      { product_id: config.products['Super API'], prefixes: '', client_name: '', fiat_currency_id: config.currencies.crypto['USDT'], cryptocurrency_id: config.currencies.crypto['USDT'] },
+      { product_id: config.products['DIRect_API'], prefixes: '', client_name: '', fiat_currency_id: config.currencies.fiat['THB'], cryptocurrency_id: config.currencies.crypto['USDT'] },
+      { product_id: config.products['PGSOFT'], prefixes: '', client_name: '', fiat_currency_id: config.currencies.fiat['THB'], cryptocurrency_id: config.currencies.crypto['USDT'] },
+      { product_id: config.products['Fix rate'], prefixes: '', client_name: '', fiat_currency_id: config.currencies.fiat['THB'], cryptocurrency_id: config.currencies.crypto['USDT'] },
+      { product_id: config.products['นอกเครือ'], prefixes: '', client_name: '', fiat_currency_id: config.currencies.fiat['THB'], cryptocurrency_id: config.currencies.crypto['USDT'] },
+      { product_id: config.products['ในเครือ'], prefixes: '', client_name: '', fiat_currency_id: config.currencies.fiat['THB'], cryptocurrency_id: config.currencies.crypto['USDT'] },
+      { product_id: config.products['SportbookV.2'], prefixes: '', client_name: '', fiat_currency_id: config.currencies.crypto['USDT'], cryptocurrency_id: config.currencies.crypto['USDT'] },
+      { product_id: config.products['Tiamut ในเครือ'], prefixes: '', client_name: '', fiat_currency_id: config.currencies.fiat['IDR'], cryptocurrency_id: config.currencies.crypto['USDT'] },
+      { product_id: config.products['Tiamut นอกเครือ'], prefixes: '', client_name: '', fiat_currency_id: config.currencies.fiat['THB'], cryptocurrency_id: config.currencies.crypto['USDT'] },
     ];
 
     for (const product of products) {

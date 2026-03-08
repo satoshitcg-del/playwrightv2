@@ -21,7 +21,7 @@ module.exports = {
   subProducts: {
     'Thai Lotto': { 'W/L': '69660aa09fa351a717829995' },
     'Super API': { 'W/L': '696531ae9fa351a717829615' },
-    'DIRect_API': { 'optest_api': '69ada047ebe111b410b1bd49' },
+    'DIRect_API': { 'testdai31': '69aded51828619175e4e6636' },
     'PGSOFT': { 'Monthly Fee PG': '68f758a6ae095015c6d719d5' },
     'Fix rate': { 'Monthly Fee fix rate': '68f21b8c10ef5782405340df' },
     'นอกเครือ': { 'Monthly fee': '689d8d7e28acc79c2e4a3f11' },
