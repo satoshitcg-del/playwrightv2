@@ -19,26 +19,26 @@ module.exports = {
   
   // Sub-Products (Update these!)
   subProducts: {
-    'Thai Lotto': { 'W/L': 'SIT_SUB_PRODUCT_ID' },
-    'Super API': { 'W/L': 'SIT_SUB_PRODUCT_ID' },
-    'DIRect_API': { 'optest_api': 'SIT_SUB_PRODUCT_ID' },
-    'PGSOFT': { 'Monthly Fee PG': 'SIT_SUB_PRODUCT_ID' },
-    'Fix rate': { 'Monthly Fee fix rate': 'SIT_SUB_PRODUCT_ID' },
-    'นอกเครือ': { 'Monthly fee': 'SIT_SUB_PRODUCT_ID' },
-    'ในเครือ': { 'MAINTENANCE': 'SIT_SUB_PRODUCT_ID' },
-    'SportbookV.2': { 'W/L': 'SIT_SUB_PRODUCT_ID' },
-    'Tiamut ในเครือ': { 'MAINTENANCE': 'SIT_SUB_PRODUCT_ID' },
-    'Tiamut นอกเครือ': { 'Monthly Fee fix rate': 'SIT_SUB_PRODUCT_ID' },
+    'Thai Lotto': { 'W/L': '69660aa09fa351a717829995' },
+    'Super API': { 'W/L': '696531ae9fa351a717829615' },
+    'DIRect_API': { 'optest_api': '69ada047ebe111b410b1bd49' },
+    'PGSOFT': { 'Monthly Fee PG': '68f758a6ae095015c6d719d5' },
+    'Fix rate': { 'Monthly Fee fix rate': '68f21b8c10ef5782405340df' },
+    'นอกเครือ': { 'Monthly fee': '689d8d7e28acc79c2e4a3f11' },
+    'ในเครือ': { 'MAINTENANCE': '689308c59baa0e160653a941' },
+    'SportbookV.2': { 'W/L': '67ebaf44062049f0aa79c77e' },
+    'Tiamut ในเครือ': { 'MAINTENANCE': '6893092d91fe851b25980825' },
+    'Tiamut นอกเครือ': { 'Monthly Fee fix rate': '68dcee606f1d1d5d2a8866d0' },
   },
   
   // Currencies
-  currencies: {
+ currencies: {
     fiat: {
-      'THB': 'SIT_FIAT_ID',
-      'IDR': 'SIT_FIAT_ID',
+      'THB': '6761431c002bb9ff210abb02',
+      'IDR': '6761431c002bb9ff210abb7d',
     },
     crypto: {
-      'USDT': 'SIT_CRYPTO_ID',
+      'USDT': '6761431c002bb9ff210abc4f',
     }
   }
 };
