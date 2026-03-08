@@ -25,7 +25,10 @@ async function fullFlow() {
 
     // Step 2: Create Customer
     console.log('📌 Step 2: Create Customer');
-    const customerData = {
+    console.log('  Token:', api.token ? api.token.substring(0, 30) + '...' : 'NOT SET');
+    
+    try {
+      await api.createCustomer(customerData);
       username: process.env.CUSTOMER_USERNAME || 'test_auto_' + Date.now(),
       full_name: 'Test Auto User',
       email: 'testauto' + Date.now() + '@gmail.com',

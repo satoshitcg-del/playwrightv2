@@ -1,12 +1,12 @@
 require('dotenv').config({ path: `.env.${process.env.ENV || 'dev'}` });
 
 const config = require('../../config');
-const API_URL = config.apiUrl || process.env.API_URL || 'https://apixint-dev.askmebill.com';
 
 class AskMeBillAPI {
   constructor() {
     this.token = null;
     this.axios = require('axios');
+    const API_URL = config.apiUrl || process.env.API_URL || 'https://apixint-dev.askmebill.com';
     this.client = this.axios.create({
       baseURL: API_URL,
       headers: {
@@ -54,14 +54,29 @@ class AskMeBillAPI {
    * Full login flow
    */
   async login(email, password, totp = '999999') {
+    const captcha = '1234';
+    
     // Step 1: Verify
-    await this.verify(email, password);
+    console.log('  Step 1: Verify...');
+    const verifyResult = await this.client.post('/v1/auth/verify', {
+      email,
+      password,
+      captcha
+    });
+    console.log('  Verify result:', verifyResult.data.code);
     
     // Step 2: Sign in
-    const signInResult = await this.signIn(email, password);
-    const tempToken = signInResult.data.token;
+    console.log('  Step 2: Sign in...');
+    const signInResult = await this.client.post('/v1/auth/sign-in', {
+      email,
+      password
+    });
+    console.log('  Sign in code:', signInResult.data.code);
+    const tempToken = signInResult.data.data?.token || signInResult.data.token;
+    console.log('  Temp token:', tempToken ? tempToken.substring(0, 50) + '...' : 'null');
     
     // Step 3: Verify TOTP
+    console.log('  Step 3: Verify TOTP...');
     const totpResult = await this.verifyTOTP(tempToken, totp);
     this.token = totpResult.data.token;
     
