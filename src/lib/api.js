@@ -114,7 +114,9 @@ class AskMeBillAPI {
       contact_telegram: customerData.contact_telegram || ''
     };
 
+    console.log('  API createCustomer called with:', JSON.stringify(data).substring(0, 100));
     const response = await this.client.post('/v1/customer/create', data);
+    console.log('  API response:', JSON.stringify(response.data).substring(0, 200));
     return response.data;
   }
 
