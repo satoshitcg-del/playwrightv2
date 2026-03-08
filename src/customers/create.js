@@ -1,5 +1,9 @@
-require('dotenv').config();
+require('dotenv').config({ path: `.env.${process.env.ENV || 'dev'}` });
 const AskMeBillAPI = require('../lib/api');
+
+function generateRandomSuffix() {
+  return Math.random().toString(36).substring(2, 8);
+}
 
 async function createCustomer() {
   const api = new AskMeBillAPI();
@@ -13,34 +17,40 @@ async function createCustomer() {
   
   api.setToken(token);
 
-  // Customer data - can be passed as arguments or use defaults
+  // Generate random suffix
+  const randomSuffix = Date.now().toString().slice(-6);
+  
+  // Customer data - use env or generate random
   const customerData = {
-    username: process.env.CUSTOMER_USERNAME || 'test_playwright_001',
-    full_name: process.env.CUSTOMER_FULL_NAME || 'Test Playwright User',
-    email: process.env.CUSTOMER_EMAIL || 'testplaywright@gmail.com',
-    phone_number: process.env.CUSTOMER_PHONE || '0888888888',
-    telegram: process.env.CUSTOMER_TELEGRAM || 'testplaywright',
+    username: process.env.CUSTOMER_USERNAME || `test_${randomSuffix}`,
+    full_name: process.env.CUSTOMER_FULL_NAME || `Test ${process.env.ENV || 'dev'} User`,
+    email: process.env.CUSTOMER_EMAIL || `test${randomSuffix}@gmail.com`,
+    phone_number: process.env.CUSTOMER_PHONE || '08' + Math.floor(Math.random() * 90000000 + 10000000).toString(),
+    telegram: process.env.CUSTOMER_TELEGRAM || `test${randomSuffix}`,
     customer_group: process.env.CUSTOMER_GROUP || 'INTERNAL',
     dial_code: '+66'
   };
 
+  console.log('Creating customer:', customerData.username);
+
   try {
-    console.log('Creating customer:', customerData.username);
-    
     const result = await api.createCustomer(customerData);
     
     if (result.code === 1001) {
       console.log('✅ Customer created successfully!');
+      console.log('Username:', customerData.username);
       
-      // Find the customer to get ID
-      const customer = await api.getCustomerByUsername(customerData.username);
-      console.log('Customer ID:', customer.id);
+      // Save customer info
+      const customerInfo = {
+        username: customerData.username,
+        email: customerData.email,
+        telegram: customerData.telegram,
+        created_at: new Date().toISOString()
+      };
+      require('fs').writeFileSync('.customer_info.json', JSON.stringify(customerInfo, null, 2));
+      console.log('Customer info saved to .customer_info.json');
       
-      // Save customer ID
-      require('fs').writeFileSync('.customer_id', customer.id);
-      console.log('Customer ID saved to .customer_id file');
-      
-      return customer;
+      return customerInfo;
     } else {
       console.error('❌ Failed:', result.message);
       process.exit(1);
