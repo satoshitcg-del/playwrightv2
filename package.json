@@ -11,6 +11,8 @@
     "create-customer": "node src/customers/create.js",
     "add-product": "node src/products/add.js",
     "add-sub-product": "node src/products/addSubProduct.js",
+    "get-winlose": "node src/reports/getWinLose.js",
+    "get-direct-api": "node src/reports/getDirectApiWinLose.js",
     "full-flow": "node src/flows/fullFlow.js"
   },
   "dependencies": {

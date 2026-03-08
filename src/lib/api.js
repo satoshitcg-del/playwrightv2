@@ -228,6 +228,36 @@ class AskMeBillAPI {
     });
     return response.data;
   }
+
+  /**
+   * Get DIRect_API W/L
+   */
+  async getDirectApiWinLose(billingCycle, month, year, data = []) {
+    const payload = {
+      billing_cycle: billingCycle,
+      month: String(month).padStart(2, '0'),
+      year: String(year),
+      data: data
+    };
+
+    const response = await this.client.post('/v1/direct-api', payload);
+    return response.data;
+  }
+
+  /**
+   * Update DIRect_API status
+   */
+  async updateDirectApiStatus(directId, status, oldStatus, note = '') {
+    const payload = {
+      direct_id: directId,
+      status: status,
+      old_status: oldStatus,
+      note: note
+    };
+
+    const response = await this.client.post('/v1/direct-api/update-status', payload);
+    return response.data;
+  }
     const response = await this.client.get('/v1/currency/fiat');
     return response.data;
   }
