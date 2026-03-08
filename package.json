@@ -1,0 +1,24 @@
+{
+  "name": "askmebill-automation",
+  "version": "1.0.0",
+  "description": "AskMeBill BO Automation using Playwright",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "demo": "node simple-demo.js",
+    "browser": "node src/flows/browserDemo.js",
+    "login": "node src/auth/login.js",
+    "create-customer": "node src/customers/create.js",
+    "add-product": "node src/products/add.js",
+    "add-sub-product": "node src/products/addSubProduct.js",
+    "full-flow": "node src/flows/fullFlow.js"
+  },
+  "dependencies": {
+    "playwright": "^1.40.0",
+    "axios": "^1.6.0",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0"
+  }
+}
