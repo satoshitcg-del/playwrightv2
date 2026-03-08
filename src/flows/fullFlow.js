@@ -43,25 +43,26 @@ async function fullFlow() {
     try {
       const customer = await api.getCustomerByUsername(customerUsername);
       customerId = customer?.id;
+      console.log('  Customer ID:', customerId || 'not found');
     } catch (e) {
       console.log('  Note: Could not get customer ID:', e.message);
     }
-    console.log('  Customer ID:', customerId || 'not found');
     console.log('');
 
     // Step 3: Add Products
     console.log('📌 Step 3: Add Products (10 products)');
+    const randomPrefix = 'test' + Date.now().toString().slice(-4);
     const products = [
-      { product_id: config.products['Thai Lotto'], prefixes: 'company', client_name: 'company', fiat_currency_id: config.currencies.fiat['THB'], cryptocurrency_id: config.currencies.crypto['USDT'] },
-      { product_id: config.products['Super API'], prefixes: 'boatsuperapi', client_name: 'boatsuperapi', fiat_currency_id: config.currencies.crypto['USDT'], cryptocurrency_id: config.currencies.crypto['USDT'] },
-      { product_id: config.products['DIRect_API'], prefixes: '', client_name: '', fiat_currency_id: config.currencies.fiat['THB'], cryptocurrency_id: config.currencies.crypto['USDT'] },
-      { product_id: config.products['PGSOFT'], prefixes: 'PG88', client_name: '', fiat_currency_id: config.currencies.fiat['THB'], cryptocurrency_id: config.currencies.crypto['USDT'] },
-      { product_id: config.products['Fix rate'], prefixes: 'AMBGT', client_name: 'AMB_GAME', fiat_currency_id: config.currencies.fiat['THB'], cryptocurrency_id: config.currencies.crypto['USDT'] },
-      { product_id: config.products['นอกเครือ'], prefixes: 'JK444', client_name: 'JOKER', fiat_currency_id: config.currencies.fiat['THB'], cryptocurrency_id: config.currencies.crypto['USDT'] },
-      { product_id: config.products['ในเครือ'], prefixes: 'MLPG', client_name: 'AMB_GAME', fiat_currency_id: config.currencies.fiat['THB'], cryptocurrency_id: config.currencies.crypto['USDT'] },
-      { product_id: config.products['SportbookV.2'], prefixes: 'TEST', client_name: 'sportbook101', fiat_currency_id: config.currencies.crypto['USDT'], cryptocurrency_id: config.currencies.crypto['USDT'] },
-      { product_id: config.products['Tiamut ในเครือ'], prefixes: 'IDR', client_name: 'ambking', fiat_currency_id: config.currencies.fiat['IDR'], cryptocurrency_id: config.currencies.crypto['USDT'] },
-      { product_id: config.products['Tiamut นอกเครือ'], prefixes: 'AMBWIN', client_name: 'ambking', fiat_currency_id: config.currencies.fiat['THB'], cryptocurrency_id: config.currencies.crypto['USDT'] },
+      { product_id: config.products['Thai Lotto'], prefixes: randomPrefix + '1', client_name: randomPrefix + '_company', fiat_currency_id: config.currencies.fiat['THB'], cryptocurrency_id: config.currencies.crypto['USDT'] },
+      { product_id: config.products['Super API'], prefixes: randomPrefix + '2', client_name: randomPrefix + '_superapi', fiat_currency_id: config.currencies.crypto['USDT'], cryptocurrency_id: config.currencies.crypto['USDT'] },
+      { product_id: config.products['DIRect_API'], prefixes: randomPrefix + '3', client_name: randomPrefix + '_direct', fiat_currency_id: config.currencies.fiat['THB'], cryptocurrency_id: config.currencies.crypto['USDT'] },
+      { product_id: config.products['PGSOFT'], prefixes: randomPrefix + '4', client_name: randomPrefix + '_pg', fiat_currency_id: config.currencies.fiat['THB'], cryptocurrency_id: config.currencies.crypto['USDT'] },
+      { product_id: config.products['Fix rate'], prefixes: randomPrefix + '5', client_name: randomPrefix + '_fix', fiat_currency_id: config.currencies.fiat['THB'], cryptocurrency_id: config.currencies.crypto['USDT'] },
+      { product_id: config.products['นอกเครือ'], prefixes: randomPrefix + '6', client_name: randomPrefix + '_outside', fiat_currency_id: config.currencies.fiat['THB'], cryptocurrency_id: config.currencies.crypto['USDT'] },
+      { product_id: config.products['ในเครือ'], prefixes: randomPrefix + '7', client_name: randomPrefix + '_inside', fiat_currency_id: config.currencies.fiat['THB'], cryptocurrency_id: config.currencies.crypto['USDT'] },
+      { product_id: config.products['SportbookV.2'], prefixes: randomPrefix + '8', client_name: randomPrefix + '_sport', fiat_currency_id: config.currencies.crypto['USDT'], cryptocurrency_id: config.currencies.crypto['USDT'] },
+      { product_id: config.products['Tiamut ในเครือ'], prefixes: randomPrefix + '9', client_name: randomPrefix + '_tiamut_in', fiat_currency_id: config.currencies.fiat['IDR'], cryptocurrency_id: config.currencies.crypto['USDT'] },
+      { product_id: config.products['Tiamut นอกเครือ'], prefixes: randomPrefix + '0', client_name: randomPrefix + '_tiamut_out', fiat_currency_id: config.currencies.fiat['THB'], cryptocurrency_id: config.currencies.crypto['USDT'] },
     ];
 
     for (const product of products) {
@@ -74,7 +75,7 @@ async function fullFlow() {
     console.log('📌 Step 4: Add Sub-Products');
     
     // Get customer products
-    const productsResult = await api.getCustomerProducts(customerUsername);
+    const productsResult = await api.getCustomerProducts(customerId);
     const customerProducts = productsResult.data;
     const productMap = {};
     customerProducts.forEach(p => {
@@ -99,7 +100,7 @@ async function fullFlow() {
       const cpid = productMap[sp.productName];
       if (cpid) {
         try {
-          const result = await api.addSubProduct(customerUsername, cpid, sp.sub_product_id);
+          const result = await api.addSubProduct(customerId, cpid, sp.sub_product_id);
           if (result.code === 1001) subProductCount++;
         } catch (e) {
           // Skip if already exists

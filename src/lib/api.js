@@ -124,7 +124,7 @@ class AskMeBillAPI {
    * Get customer by username
    */
   async getCustomerByUsername(username) {
-    const response = await this.client.get(`/v1/customer/search?username=${username}`);
+    const response = await this.client.get(`/v1/customer/search?username=${username}&page=1&limit=10`);
     const customers = response.data.data.customers;
     return customers.find(c => c.username === username) || null;
   }
