@@ -206,9 +206,28 @@ class AskMeBillAPI {
   }
 
   /**
-   * Get currencies
+   * Get W/L (Win/Lose) for a product
    */
-  async getFiatCurrencies() {
+  async getWinLose(productId, month, year) {
+    const payload = {
+      product_id: productId,
+      month: String(month),
+      year: String(year)
+    };
+
+    const response = await this.client.post('/v1/pm/confirm-wl', payload);
+    return response.data;
+  }
+
+  /**
+   * Get AutoPlay W/L (alternative endpoint - GET)
+   */
+  async getAutoPlayWinLose(productId, month, year) {
+    const response = await this.client.get('/v1/autoplay/winlose', {
+      params: { product_id: productId, month, year }
+    });
+    return response.data;
+  }
     const response = await this.client.get('/v1/currency/fiat');
     return response.data;
   }
