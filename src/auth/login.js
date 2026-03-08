@@ -1,12 +1,15 @@
-require('dotenv').config();
+require('dotenv').config({ path: `.env.${process.env.ENV || 'dev'}` });
 const AskMeBillAPI = require('../lib/api');
 
 async function login() {
   const api = new AskMeBillAPI();
   
-  const email = process.env.EMAIL || 'admin_eiji';
-  const password = process.env.PASSWORD || '0897421942@Earth';
-  const totp = process.env.TOTP || '999999';
+  const email = process.env.EMAIL;
+  const password = process.env.PASSWORD;
+  const totp = process.env.TOTP;
+
+  console.log(`Logging in with ENV: ${process.env.ENV || 'dev'}`);
+  console.log(`Email: ${email}`);
 
   try {
     console.log('Logging in...');

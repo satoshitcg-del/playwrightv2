@@ -6,7 +6,7 @@ const config = require('../../config');
 class AskMeBillAPI {
   constructor() {
     this.token = null;
-    this axios = require('axios');
+    this.axios = require('axios');
     this.client = this.axios.create({
       baseURL: API_URL,
       headers: {
@@ -264,6 +264,9 @@ class AskMeBillAPI {
    * Get currencies
    */
   async getFiatCurrencies() {
+    const response = await this.client.get('/v1/currency/fiat');
+    return response.data;
+  }
 
   async getCryptoCurrencies() {
     const response = await this.client.get('/v1/currency/crypto');
