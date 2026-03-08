@@ -1,4 +1,4 @@
-require('dotenv').config({ path: `.env.${process.env.ENV || 'dev'}` });
+require('dotenv').config({ path: `.env.${process.env.ENV || 'sit'}` });
 const AskMeBillAPI = require('../lib/api');
 
 function generateRandomSuffix() {
@@ -23,7 +23,7 @@ async function createCustomer() {
   // Customer data - use env or generate random
   const customerData = {
     username: process.env.CUSTOMER_USERNAME || `test_${randomSuffix}`,
-    full_name: process.env.CUSTOMER_FULL_NAME || `Test ${process.env.ENV || 'dev'} User`,
+    full_name: process.env.CUSTOMER_FULL_NAME || `Test ${process.env.ENV || 'sit'} User`,
     email: process.env.CUSTOMER_EMAIL || `test${randomSuffix}@gmail.com`,
     phone_number: process.env.CUSTOMER_PHONE || '08' + Math.floor(Math.random() * 90000000 + 10000000).toString(),
     telegram: process.env.CUSTOMER_TELEGRAM || `test${randomSuffix}`,

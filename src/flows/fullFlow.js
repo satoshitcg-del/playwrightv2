@@ -1,4 +1,4 @@
-require('dotenv').config({ path: `.env.${process.env.ENV || 'dev'}` });
+require('dotenv').config({ path: `.env.${process.env.ENV || 'sit'}` });
 const AskMeBillAPI = require('../lib/api');
 const config = require('../../config');
 
@@ -27,7 +27,7 @@ async function fullFlow() {
     const customerUsername = `test_${randomSuffix}`;
     const customerData = {
       username: customerUsername,
-      full_name: `Test ${process.env.ENV || 'dev'} User ${randomSuffix}`,
+      full_name: `Test ${process.env.ENV || 'sit'} User ${randomSuffix}`,
       email: `test${randomSuffix}@gmail.com`,
       phone_number: '08' + Math.floor(Math.random() * 90000000 + 10000000).toString(),
       telegram: `test${randomSuffix}`,

@@ -1,4 +1,4 @@
-require('dotenv').config({ path: `.env.${process.env.ENV || 'dev'}` });
+require('dotenv').config({ path: `.env.${process.env.ENV || 'sit'}` });
 
 const config = require('../../config');
 
