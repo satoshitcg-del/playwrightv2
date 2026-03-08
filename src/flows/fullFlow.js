@@ -1,12 +1,14 @@
-require('dotenv').config();
+require('dotenv').config({ path: `.env.${process.env.ENV || 'dev'}` });
 const AskMeBillAPI = require('../lib/api');
 
 async function fullFlow() {
   const api = new AskMeBillAPI();
   
-  const email = process.env.EMAIL || 'admin_eiji';
-  const password = process.env.PASSWORD || '0897421942@Earth';
-  const totp = process.env.TOTP || '999999';
+  const email = process.env.EMAIL;
+  const password = process.env.PASSWORD;
+  const totp = process.env.TOTP;
+
+  console.log('Email:', email, 'TOTP:', totp);
 
   console.log('========================================');
   console.log('AskMeBill BO - Full Automation Flow');

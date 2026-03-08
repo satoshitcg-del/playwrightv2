@@ -1,7 +1,7 @@
-require('dotenv').config();
+require('dotenv').config({ path: `.env.${process.env.ENV || 'dev'}` });
 
-const API_URL = process.env.API_URL || 'https://apixint-dev.askmebill.com';
 const config = require('../../config');
+const API_URL = config.apiUrl || process.env.API_URL || 'https://apixint-dev.askmebill.com';
 
 class AskMeBillAPI {
   constructor() {
